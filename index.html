@@ -1,0 +1,1252 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsUSA | AI Visibility</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-top: #EBD9C1;
+            --bg-bottom: #C28E74;
+            --text-ink: #2C201A;
+            --accent-warm: #B85B3E;
+            --orb-amber: #FFBF00;
+            --orb-rose: #D87D84;
+            --font-serif: 'Newsreader', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --easing: cubic-bezier(0.25, 0.8, 0.25, 1);
+            --pill-paper: #F1EADD;
+            --pill-coral: #CE5A48;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+            font-family: var(--font-sans);
+            color: var(--text-ink);
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        ::selection { background: var(--pill-coral); color: var(--pill-paper); }
+
+        .hero {
+            width: 100%;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 550px;
+            padding: 5rem;
+            position: relative;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5vw;
+            z-index: 50;
+        }
+        .logo-mark {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+        }
+        .nav-links a { color: var(--text-ink); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+        .nav-links a:hover { opacity: 1; }
+
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 10;
+            padding-right: 2rem;
+        }
+        .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-warm);
+            margin-bottom: 1.5rem;
+        }
+        .key-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 5rem);
+            line-height: 1.05;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.03em;
+        }
+        .detail-paragraphs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 480px;
+        }
+        .detail-paragraphs p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        .visual-column {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .orb-container {
+            width: min(580px, 45vw);
+            height: min(580px, 45vw);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .orb-layer {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, #FFE9D2 0%, var(--orb-rose) 45%, var(--orb-amber) 100%);
+            box-shadow:
+                inset 10px 10px 40px rgba(255,255,255,0.4),
+                inset -10px -10px 40px rgba(184,91,62,0.3),
+                20px 40px 80px rgba(71,38,25,0.15);
+        }
+        .orb-1 {
+            width: 480px; height: 480px;
+            border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+            opacity: 0.5;
+            filter: blur(3px);
+            animation: morph1 18s var(--easing) infinite alternate, breathe 10s var(--easing) infinite;
+        }
+        .orb-2 {
+            width: 460px; height: 460px;
+            border-radius: 50% 50% 40% 60% / 55% 35% 65% 45%;
+            opacity: 0.6;
+            filter: blur(2px);
+            animation: morph2 14s var(--easing) infinite alternate, breathe 12s var(--easing) infinite;
+            animation-delay: -3s;
+        }
+        .orb-3 {
+            width: 440px; height: 440px;
+            border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%;
+            opacity: 0.85;
+            filter: blur(1px);
+            animation: morph3 16s var(--easing) infinite alternate, breathe 8s var(--easing) infinite;
+            animation-delay: -6s;
+        }
+
+        @keyframes morph1 {
+            0% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; }
+            100% { border-radius: 55% 45% 30% 70% / 60% 40% 60% 40%; }
+        }
+        @keyframes morph2 {
+            0% { border-radius: 50% 50% 40% 60% / 55% 35% 65% 45%; }
+            100% { border-radius: 38% 62% 55% 45% / 48% 52% 48% 52%; }
+        }
+        @keyframes morph3 {
+            0% { border-radius: 60% 40% 50% 50% / 40% 60% 40% 60%; }
+            100% { border-radius: 45% 55% 65% 35% / 55% 45% 55% 45%; }
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 251, 245, 0.75);
+            backdrop-filter: blur(12px);
+            padding: 0.85rem 1.1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 10px 30px rgba(71,38,25,0.12);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 20;
+            white-space: nowrap;
+        }
+        .card-logo {
+            width: 30px; height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.65rem;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        .card-title { font-size: 0.8rem; font-weight: 600; }
+        .card-meta { font-size: 0.65rem; opacity: 0.55; }
+
+        @keyframes float1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes float2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes float3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+        @keyframes float4 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .card-yahoo  { top: 5%;   right: 40%;  animation: float1 7s ease-in-out infinite; }
+        .card-usa    { top: 10%;  right: 10%;  animation: float2 8s ease-in-out infinite; animation-delay: -1s; }
+        .card-ap     { top: 25%;  right: 60%;  animation: float3 6.5s ease-in-out infinite; animation-delay: -2s; }
+        .card-forbes { top: 35%;  right: -2%;  animation: float4 7.5s ease-in-out infinite; animation-delay: -3s; }
+        .card-wapo   { top: 50%;  right: 55%;  animation: float1 8.5s ease-in-out infinite; animation-delay: -4s; }
+        .card-wsj    { top: 58%;  right: 5%;   animation: float2 7s ease-in-out infinite; animation-delay: -1.5s; }
+        .card-tc     { top: 75%;  right: 50%;  animation: float3 6s ease-in-out infinite; animation-delay: -5s; }
+        .card-lat    { top: 78%;  right: 15%;  animation: float4 7.5s ease-in-out infinite; animation-delay: -3.5s; }
+
+        .score-card {
+            background: var(--text-ink);
+            color: #F8EFE4;
+            padding: 1.5rem 1.75rem;
+            border-radius: 14px;
+            position: absolute;
+            bottom: 5%; right: -12%;
+            z-index: 25;
+            width: 190px;
+            animation: float2 7s ease-in-out infinite reverse;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .score-val { font-family: var(--font-serif); font-size: 2.8rem; line-height: 1; }
+        .score-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.4rem; opacity: 0.7; }
+        .score-bar { height: 2px; width: 100%; background: var(--accent-warm); margin-top: 0.75rem; }
+        .score-cycle {
+            position: relative;
+            height: 4.5rem;
+        }
+        .score-cycle-item {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            opacity: 0;
+            animation: cycleFade 15s ease-in-out infinite;
+        }
+        .score-cycle-item:nth-child(1) { animation-delay: 0s; opacity: 1; }
+        .score-cycle-item:nth-child(2) { animation-delay: 5s; }
+        .score-cycle-item:nth-child(3) { animation-delay: 10s; }
+        @keyframes cycleFade {
+            0% { opacity: 0; }
+            5%, 28% { opacity: 1; }
+            33%, 100% { opacity: 0; }
+        }
+
+        .fragment-pill {
+            position: absolute;
+            background: var(--pill-paper);
+            color: var(--pill-coral);
+            padding: 0.35rem 0.7rem;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            z-index: 15;
+            opacity: 0;
+            pointer-events: none;
+        }
+        @keyframes radiate {
+            0% { transform: translate(0,0) scale(0.8); opacity: 0; }
+            15% { opacity: 1; }
+            75% { opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.05); opacity: 0; }
+        }
+        .frag-1  { --tx: 250px;  --ty: -200px; animation: radiate 9s linear infinite; }
+        .frag-2  { --tx: -200px; --ty: -230px; animation: radiate 10s linear infinite; animation-delay: 1s; }
+        .frag-3  { --tx: 270px;  --ty: 30px;   animation: radiate 8.5s linear infinite; animation-delay: 2s; }
+        .frag-4  { --tx: -230px; --ty: 160px;  animation: radiate 11s linear infinite; animation-delay: 3s; }
+        .frag-5  { --tx: 30px;   --ty: -270px; animation: radiate 9.5s linear infinite; animation-delay: 4s; }
+        .frag-6  { --tx: 160px;  --ty: 230px;  animation: radiate 10.5s linear infinite; animation-delay: 5s; }
+        .frag-7  { --tx: -270px; --ty: -60px;  animation: radiate 9s linear infinite; animation-delay: 6s; }
+        .frag-8  { --tx: 220px;  --ty: -130px; animation: radiate 11s linear infinite; animation-delay: 7s; }
+        .frag-9  { --tx: -160px; --ty: 250px;  animation: radiate 9.5s linear infinite; animation-delay: 8s; }
+        .frag-10 { --tx: 80px;   --ty: 270px;  animation: radiate 10s linear infinite; animation-delay: 9s; }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 30;
+            opacity: 0.4;
+        }
+        .scroll-hint span {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .scroll-arrow {
+            width: 16px; height: 16px;
+            border-right: 1.5px solid var(--text-ink);
+            border-bottom: 1.5px solid var(--text-ink);
+            transform: rotate(45deg);
+            margin: 0 auto;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(5px); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; padding: 8rem 2rem 4rem; }
+            .content-column { padding-right: 0; margin-bottom: 4rem; }
+            .visual-column { min-height: 450px; }
+            .orb-container { width: 320px; height: 320px; }
+            .orb-1 { width: 280px; height: 280px; }
+            .orb-2 { width: 260px; height: 260px; }
+            .orb-3 { width: 240px; height: 240px; }
+            .nav-links { display: none; }
+            .floating-card { transform: scale(0.85); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <nav class="nav">
+            <div class="logo-mark">NewsUSA</div>
+            <div class="nav-links">
+                <a href="#opportunity">The Opportunity</a>
+                <a href="#infrastructure">The Infrastructure</a>
+                <a href="#model">The Model</a>
+                <a href="#contact">Monday</a>
+            </div>
+        </nav>
+
+        <div class="content-column">
+            <div class="label">AI Optimization Network</div>
+            <h1 class="key-headline">Your brand, in every AI answer.</h1>
+            <div class="detail-paragraphs">
+                <p>When a business owner asks AI about your industry, does your name come up? For most companies, the answer is no. We fix that. Guaranteed.</p>
+                <p>NewsUSA has placed editorial content across 2,500+ news sites for 40 years. AI models now use those exact placements to decide which brands to recommend.</p>
+            </div>
+        </div>
+
+        <div class="visual-column">
+            <div class="orb-container">
+                <div class="orb-layer orb-1"></div>
+                <div class="orb-layer orb-2"></div>
+                <div class="orb-layer orb-3"></div>
+
+                <div class="fragment-pill frag-1">460% above engagement guarantee</div>
+                <div class="fragment-pill frag-2">2,500+ placements verified</div>
+                <div class="fragment-pill frag-3">Indexed by ChatGPT AI</div>
+                <div class="fragment-pill frag-4">Cited in Perplexity AI</div>
+                <div class="fragment-pill frag-5">Authority signal: Strong</div>
+                <div class="fragment-pill frag-6">170M readers reached</div>
+                <div class="fragment-pill frag-7">Referenced by Claude AI</div>
+                <div class="fragment-pill frag-8">50-state coverage</div>
+                <div class="fragment-pill frag-9">Found in Google Gemini AI</div>
+                <div class="fragment-pill frag-10">AP-style editorial content</div>
+
+                <div class="floating-card card-yahoo">
+                    <div class="card-logo" style="background:#6001D2;">Y!</div>
+                    <div><div class="card-title">Yahoo News</div><div class="card-meta">Search Visibility</div></div>
+                </div>
+                <div class="floating-card card-ap">
+                    <div class="card-logo" style="background:#7B1FA2;">YF</div>
+                    <div><div class="card-title">Yahoo Finance</div><div class="card-meta">Financial Authority</div></div>
+                </div>
+                <div class="floating-card card-usa">
+                    <div class="card-logo" style="background:#009BFF;">USA</div>
+                    <div><div class="card-title">USA Today</div><div class="card-meta">Syndicated Editorial</div></div>
+                </div>
+                <div class="floating-card card-forbes">
+                    <div class="card-logo" style="background:#000;">F</div>
+                    <div><div class="card-title">Forbes</div><div class="card-meta">Brand Leadership</div></div>
+                </div>
+                <div class="floating-card card-wapo">
+                    <div class="card-logo" style="background:#231F20;">259</div>
+                    <div><div class="card-title">259 Exclusive Sites</div><div class="card-meta">Home Page Placements</div></div>
+                </div>
+                <div class="floating-card card-wsj">
+                    <div class="card-logo" style="background:#1a3044;">WSJ</div>
+                    <div><div class="card-title">Wall Street Journal</div><div class="card-meta">Featured Placement</div></div>
+                </div>
+                <div class="floating-card card-tc">
+                    <div class="card-logo" style="background:#0A9E01;">TC</div>
+                    <div><div class="card-title">TechCrunch</div><div class="card-meta">AI-Indexed Content</div></div>
+                </div>
+                <div class="floating-card card-lat">
+                    <div class="card-logo" style="background:#B85B3E;">LAT</div>
+                    <div><div class="card-title">LA Times</div><div class="card-meta">Regional Authority</div></div>
+                </div>
+
+                <div class="score-card">
+                    <div class="score-cycle">
+                        <div class="score-cycle-item">
+                            <div class="score-val">94.7</div>
+                            <div class="score-label">AI Visibility Score</div>
+                        </div>
+                        <div class="score-cycle-item">
+                            <div class="score-val">7/10</div>
+                            <div class="score-label">AI Queries Answered</div>
+                        </div>
+                        <div class="score-cycle-item">
+                            <div class="score-val">+340%</div>
+                            <div class="score-label">Citation Increase</div>
+                        </div>
+                    </div>
+                    <div class="score-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ========== DECK SECTIONS ========== -->
+    <style>
+        .deck-section {
+            padding: 6rem 5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(43,59,72,0.15);
+        }
+        .deck-section.paper-bg { background: #F1EADD; }
+        .deck-section.sand-bg { background: #D5C4A1; }
+        .section-num {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--pill-coral);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .section-headline {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 500;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            color: var(--text-ink);
+        }
+        .section-body {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 680px;
+            color: var(--text-ink);
+            opacity: 0.85;
+        }
+        .section-body p { margin-bottom: 1.5rem; }
+        .stat-row {
+            display: flex;
+            gap: 4rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        .stat-item { text-align: left; }
+        .stat-num {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 500;
+            color: var(--pill-coral);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.5rem;
+            opacity: 0.6;
+        }
+        .deck-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+        .deck-table th {
+            text-align: left;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid var(--text-ink);
+            font-weight: 600;
+            opacity: 0.7;
+        }
+        .deck-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(43,59,72,0.15);
+            vertical-align: top;
+        }
+        .deck-table tr:hover td { color: var(--pill-coral); }
+        .italic-close {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--pill-coral);
+            margin-top: 3rem;
+            line-height: 1.4;
+        }
+        .trio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+        .trio-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        .trio-avatar {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: rgba(43,59,72,0.15);
+            margin: 0 auto 1.5rem;
+        }
+        .trio-name {
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+        .trio-role {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        .without-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .without-card {
+            padding: 1.5rem;
+            border: 1px solid rgba(43,59,72,0.15);
+        }
+        .without-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--pill-coral);
+            margin-bottom: 0.75rem;
+        }
+        .without-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+        .ask-card {
+            background: rgba(255,251,245,0.6);
+            border: 1px solid rgba(43,59,72,0.15);
+            padding: 2rem 2.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .ask-num {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--pill-coral);
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        .ask-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .ask-body {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        .close-section {
+            text-align: center;
+            padding: 5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .close-line {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+        .close-name {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-top: 3rem;
+        }
+        .close-meta {
+            font-size: 0.75rem;
+            opacity: 0.5;
+            margin-top: 0.5rem;
+        }
+        .deck-footer {
+            background: #10362A;
+            color: #D5C4A1;
+            padding: 2rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.7;
+        }
+        @media (max-width: 768px) {
+            .deck-section { padding: 3rem 1.5rem; }
+            .trio-grid, .without-grid { grid-template-columns: 1fr; }
+            .stat-row { gap: 2rem; }
+        }
+    </style>
+
+    <!-- SECTION 1: THE OPPORTUNITY -->
+    <section class="deck-section paper-bg" id="opportunity">
+        <div class="section-num">01</div>
+        <h2 class="section-headline">A $17 billion market just opened.<br>Nobody owns it yet.</h2>
+        <div class="section-body">
+            <p>When a procurement officer Googles "environmental services companies in Ohio," a company with a spotless safety record and three strong references doesn't show up. A competitor with half the capability but editorial placements across news sites does. The procurement officer's feedback: "We'd seen their name before."</p>
+            <p>That company spent $34,000 on a PR firm over 18 months. Four press releases. One pickup in a trade publication nobody reads. Zero contracts changed.</p>
+            <p>This is not a PR problem. This is the same shift that happened with SEO twenty years ago. In 2005, every business owner heard "you need to be on Google." It sounded technical and expensive. The businesses that moved first built compounding advantages their competitors never overcame. AI search is following the same curve, faster.</p>
+        </div>
+        <div class="stat-row">
+            <div class="stat-item">
+                <div class="stat-num">$1B</div>
+                <div class="stat-label">GEO market today</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">$17-34B</div>
+                <div class="stat-label">Projected by 2034</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">15B+</div>
+                <div class="stat-label">AI queries per month</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">0</div>
+                <div class="stat-label">Dominant players</div>
+            </div>
+        </div>
+        <!-- GEO Market Growth Chart (CSS-only) -->
+        <div class="geo-market" style="margin: 3rem 0;">
+            <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin-bottom:0.5rem;">GEO Market Size (Generative Engine Optimization)</h3>
+            <p style="font-size:0.85rem; opacity:0.6; margin-bottom:2rem;">40-50% annual growth rate</p>
+            <div style="display:flex; align-items:flex-end; gap:2.5rem; height:220px; max-width:400px;">
+                <!-- 2025 bar -->
+                <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;">
+                    <div style="font-family:var(--font-serif); font-size:1rem; font-weight:600; margin-bottom:0.5rem;">$848M-$1B</div>
+                    <div class="bar-grow delay-1" style="width:100%; max-width:100px; height:12%; background:var(--pill-coral); border-radius:4px 4px 0 0; opacity:0.6;"></div>
+                    <div style="font-size:0.75rem; margin-top:0.5rem; font-weight:700;">2025</div>
+                </div>
+                <!-- 2034 bar -->
+                <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;">
+                    <div style="font-family:var(--font-serif); font-size:1.1rem; font-weight:600; color:var(--pill-coral);">$17B-$34B</div>
+                    <div class="bar-grow delay-2" style="width:100%; max-width:100px; height:95%; background:var(--pill-coral); border-radius:4px 4px 0 0;"></div>
+                    <div style="font-size:0.75rem; margin-top:0.5rem; font-weight:700; color:var(--pill-coral);">2034</div>
+                </div>
+            </div>
+            <p style="font-size:0.7rem; opacity:0.45; margin-top:1.5rem; font-style:italic;">Sources: Dimension Market Research, NaviStrat Analytics, Valuates Reports</p>
+        </div>
+
+        <p class="italic-close">The window for a trusted provider to own this space is measured in months, not years.</p>
+    </section>
+
+    <!-- SECTION 2: YOUR INFRASTRUCTURE -->
+    <section class="deck-section sand-bg" id="infrastructure">
+        <div class="section-num">02</div>
+        <h2 class="section-headline">You built AI infrastructure<br>15 years before the market existed.</h2>
+        <div class="section-body">
+            <p>AI models evaluate brand authority through five signals: presence across trusted editorial domains, consistency of messaging, editorial quality of content, frequency of mentions, and recency. NewsUSA's 40-year-old service delivers all five in a single campaign. A press release on PR Newswire delivers none.</p>
+            <p>The Toys for Tots engagement proves the compounding mechanism. Monthly syndicated features over five years built cumulative editorial presence across 2,500+ authoritative domains. Result: $243 million in additional annual revenue. That compounding effect is exactly what AI models reward.</p>
+        </div>
+        <div class="stat-row">
+            <div class="stat-item">
+                <div class="stat-num">40 yrs</div>
+                <div class="stat-label">Continuous operation</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">32,000+</div>
+                <div class="stat-label">Clients served</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">$2.20</div>
+                <div class="stat-label">Per verified placement</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">3x</div>
+                <div class="stat-label">More efficient than nearest competitor</div>
+            </div>
+        </div>
+        <table class="deck-table">
+            <thead>
+                <tr><th>Metric</th><th>NewsUSA</th><th>Brandpoint</th><th>StatePoint</th><th>PR Newswire</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Cost</td><td><strong>$5,500</strong></td><td>$6,325</td><td>$3,995</td><td>~$2,500/release</td></tr>
+                <tr><td>Guaranteed placements</td><td><strong>2,500-2,800</strong></td><td>800-1,000</td><td>1,000-1,200</td><td>None</td></tr>
+                <tr><td>Cost per verified placement</td><td><strong>$2.20</strong></td><td>$6.80</td><td>$3.75</td><td>N/A</td></tr>
+                <tr><td>Exclusive home pages</td><td><strong>259 sites</strong></td><td>10 sites</td><td>No</td><td>No</td></tr>
+                <tr><td>AI optimization service</td><td><strong>Yes</strong></td><td>No</td><td>No</td><td>No</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Competitive Comparison Bar Chart (CSS-only) -->
+        <div class="cost-per-placement" style="margin: 3rem 0;">
+            <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin-bottom:0.5rem;">Cost per verified placement</h3>
+            <p style="font-size:0.85rem; opacity:0.6; margin-bottom:2rem;">NewsUSA is 3x more cost-efficient than the nearest content syndication competitor.</p>
+            <div class="cost-chart" style="display:flex; flex-direction:column; gap:1.5rem; max-width:600px;">
+                <div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                        <span style="font-size:0.9rem; font-weight:700;">NewsUSA</span>
+                        <span style="font-family:var(--font-serif); font-weight:600; font-size:1.1rem; color:var(--pill-coral);">$2.20</span>
+                    </div>
+                    <div style="height:32px; background:rgba(206,90,72,0.1); border-radius:6px; overflow:hidden;">
+                        <div class="cost-bar" style="height:100%; width:32%; background:var(--pill-coral); border-radius:6px; transform:scaleX(0); transform-origin:left; transition:transform 1.2s cubic-bezier(0.25,0.8,0.25,1) 0.1s;"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                        <span style="font-size:0.9rem; font-weight:700;">StatePoint</span>
+                        <span style="font-family:var(--font-serif); font-weight:600; font-size:1.1rem; opacity:0.6;">$3.75</span>
+                    </div>
+                    <div style="height:32px; background:rgba(206,90,72,0.1); border-radius:6px; overflow:hidden;">
+                        <div class="cost-bar" style="height:100%; width:55%; background:rgba(206,90,72,0.35); border-radius:6px; transform:scaleX(0); transform-origin:left; transition:transform 1.2s cubic-bezier(0.25,0.8,0.25,1) 0.3s;"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.4rem;">
+                        <span style="font-size:0.9rem; font-weight:700;">Brandpoint</span>
+                        <span style="font-family:var(--font-serif); font-weight:600; font-size:1.1rem; opacity:0.6;">$6.80</span>
+                    </div>
+                    <div style="height:32px; background:rgba(206,90,72,0.1); border-radius:6px; overflow:hidden;">
+                        <div class="cost-bar" style="height:100%; width:100%; background:rgba(206,90,72,0.35); border-radius:6px; transform:scaleX(0); transform-origin:left; transition:transform 1.2s cubic-bezier(0.25,0.8,0.25,1) 0.5s;"></div>
+                    </div>
+                </div>
+                <div style="margin-top:0.5rem; padding:0.75rem 1rem; border-left:3px solid rgba(206,90,72,0.3); font-size:0.85rem; opacity:0.6; font-style:italic;">
+                    PR Newswire: ~$2,500/release but no guaranteed placements. Cost per placement is not calculable.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDY PROOF -->
+    <section class="deck-section paper-bg">
+        <div style="text-align:center; margin-bottom:3rem;">
+            <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; opacity:0.5; font-weight:600; margin-bottom:1rem;">Proven Results</div>
+            <h2 class="section-headline" style="margin-bottom:0.5rem;">40 years of proof.<br>Real companies. Real numbers.</h2>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; max-width:900px; margin:0 auto;">
+            <div style="text-align:center; padding:2.5rem 1.5rem; border:1px solid rgba(43,59,72,0.1);">
+                <div style="font-family:var(--font-serif); font-size:3rem; font-weight:500; color:var(--pill-coral); line-height:1;">$243M</div>
+                <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; margin-top:0.75rem; opacity:0.6;">Additional annual revenue</div>
+                <div style="margin-top:1.5rem; font-size:0.9rem; line-height:1.5; opacity:0.75;">Marine Toys for Tots. Monthly features over five years. 86% increase.</div>
+            </div>
+            <div style="text-align:center; padding:2.5rem 1.5rem; border:1px solid rgba(43,59,72,0.1);">
+                <div style="font-family:var(--font-serif); font-size:3rem; font-weight:500; color:var(--pill-coral); line-height:1;">$50M</div>
+                <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; margin-top:0.75rem; opacity:0.6;">From zero to national brand</div>
+                <div style="margin-top:1.5rem; font-size:0.9rem; line-height:1.5; opacity:0.75;">Quigley Corp Cold-Eeze. Cumulative monthly placements.</div>
+            </div>
+            <div style="text-align:center; padding:2.5rem 1.5rem; border:1px solid rgba(43,59,72,0.1);">
+                <div style="font-family:var(--font-serif); font-size:3rem; font-weight:500; color:var(--pill-coral); line-height:1;">460%</div>
+                <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; margin-top:0.75rem; opacity:0.6;">Above engagement guarantee</div>
+                <div style="margin-top:1.5rem; font-size:0.9rem; line-height:1.5; opacity:0.75;">Recent campaign. 4,147 engaged views. 4:38 avg time on site.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENT LOGO BAR -->
+    <section style="background:#F1EADD; padding: 3.5rem 3rem; border-top: 1px solid rgba(43,59,72,0.1); border-bottom: 1px solid rgba(43,59,72,0.1); width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;">
+        <div style="text-align:center; margin-bottom:2rem;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; font-weight:600;">Trusted by 32,000+ brands since 1987</span>
+        </div>
+        <div style="display:flex; justify-content:center; align-items:center; gap:3.5rem; flex-wrap:wrap; max-width:1200px; margin:0 auto; opacity:0.75;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/AMAZON-LOGO.png" alt="Amazon" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/PEPSI-LOGO.png" alt="Pepsi" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/PFIZER-LOGO.png" alt="Pfizer" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/IBM-LOGO-1.png" alt="IBM" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/VISA-LOGO.png" alt="Visa" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/ADOBE-LOGO.png" alt="Adobe" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/BANK-OF-AMERICA-LOGO.png" alt="Bank of America" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/TOYS-FOR-TOTS-LOGO.png" alt="Toys for Tots" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/03/DEPT-OF-HOMELAND-LOGO.png" alt="DHS" style="height:50px; object-fit:contain;">
+            <img src="https://newsusa.com/wp-content/uploads/2024/04/NESTLE-LOGO.png" alt="Nestle" style="height:50px; object-fit:contain;">
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE GAP -->
+    <section class="deck-section paper-bg">
+        <div class="section-num">03</div>
+        <h2 class="section-headline">You have the product.<br>You need the engine.</h2>
+        <div class="section-body">
+            <p>Your 32,000 clients bought content syndication. They don't know they were buying AI infrastructure. The businesses paying $5,000 to $50,000 a month to GEO agencies for keyword tricks and schema markup don't know that guaranteed editorial placement across 2,500 authoritative domains is the mechanism that actually works.</p>
+            <p>What clients hear now: content syndication. What they should hear: AI visibility infrastructure. That single reframe, backed by a dedicated sales engine, is the entire opportunity.</p>
+            <p>You haven't needed an outbound sales operation because the product sold itself for 40 years. The AI market changes that. The buyers who need this most urgently (SMBs, mid-market companies, nonprofits) don't know content syndication exists. They need someone to find them, show them the gap, and close them. That's what we build.</p>
+        </div>
+        <p class="italic-close">The product exists. The sales channel doesn't. That's what we build.</p>
+    </section>
+
+    <!-- SECTION 4: THE MODEL -->
+    <section class="deck-section sand-bg" id="model">
+        <div class="section-num">04</div>
+        <h2 class="section-headline">Three people. Three roles.<br>Zero overlap.</h2>
+
+        <div class="trio-grid">
+            <div class="trio-card">
+                <div style="width:80px;height:80px;border-radius:16px;background:var(--pill-paper);margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid rgba(43,59,72,0.1);"><span style="font-family:var(--font-serif);font-size:0.95rem;font-weight:600;color:var(--text-ink);letter-spacing:-0.02em;line-height:1.1;text-align:center;">News<span style="color:var(--pill-coral);">USA</span></span></div>
+                <div class="trio-name">Rick Smith</div>
+                <div class="trio-role">40 years. 2,500 sites. 170M readers. The infrastructure.</div>
+            </div>
+            <div class="trio-card">
+                <div style="width:80px;height:80px;border-radius:16px;background:#1a1a2e;margin:0 auto 1.5rem;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);color:#F1EADD;font-size:1.1rem;font-weight:600;letter-spacing:0.04em;box-shadow:0 4px 12px rgba(0,0,0,0.1);">CB</div>
+                <div class="trio-name">Stephen Adler</div>
+                <div class="trio-role">35 years. Fortune 500 cause marketing. The relationships.</div>
+            </div>
+            <div class="trio-card">
+                <div style="width:80px;height:80px;border-radius:16px;background:#111;margin:0 auto 1.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+                    <span style="font-family:monospace;font-size:1.1rem;font-weight:700;color:#fff;">SX</span>
+                    <div style="width:60%;height:2px;background:#FF3B30;margin-top:4px;"></div>
+                </div>
+                <div class="trio-name">Tom Nwachuku</div>
+                <div class="trio-role">Decade of enterprise sales leadership. AI-powered go-to-market. The sales engine.</div>
+            </div>
+        </div>
+
+        <div class="without-grid">
+            <div class="without-card">
+                <div class="without-label">NewsUSA Brings</div>
+                <div class="without-text">The distribution engine. 2,500+ guaranteed editorial placements. 40 years of newsroom trust. AI optimization infrastructure. The product.</div>
+            </div>
+            <div class="without-card">
+                <div class="without-label">Charity Brands Brings</div>
+                <div class="without-text">Fortune 500 relationships. 35 years of cause marketing architecture. Warm introductions to C-suite buyers. The credibility.</div>
+            </div>
+            <div class="without-card">
+                <div class="without-label">Summit Digital Brings</div>
+                <div class="without-text">The modern sales engine. Cold outbound at scale. AI measurement and reporting. Campaign management. The channel.</div>
+            </div>
+        </div>
+
+        <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin: 3rem 0 1.5rem;">How We Find Customers</h3>
+        <div class="section-body">
+            <p>We reach 500 new business owners every week through targeted outreach. The pitch is simple: we offer a free AI visibility report that shows them exactly where their business does and doesn't show up when people ask AI questions about their industry. Their competitor shows up. They don't. That's the conversation starter.</p>
+            <p>From there, the sale follows the same path every time. The prospect sees the gap. We show them how NewsUSA fills it. They sign up for a campaign. Revenue follows within 30 days of first contact.</p>
+            <p>Tom managed $37.5 million in client revenue at TikTok, exceeding targets by 25% across 300+ accounts. He built and led the AI Sales Lab (275+ members) that contributed to over a third of division revenue. He has spent a decade selling digital marketing and advertising to the largest brands in the world. He knows how to find customers, close deals, and generate revenue.</p>
+        </div>
+
+        <table class="deck-table">
+            <thead>
+                <tr><th>Tier</th><th>Price</th><th>Includes</th><th>Who buys this</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Starter</strong></td><td>$5,500</td><td>1 feature story, 2,500+ placements, AI visibility report (before/after)</td><td>An $8M environmental services company that lost a $5M contract because "we'd never seen their name before." One campaign. Immediate proof.</td></tr>
+                <tr><td><strong>Growth</strong></td><td>$18,000</td><td>3 stories over 90 days, top-tier outlets (USA Today, Forbes, LA Times), AI optimization, dedicated account management</td><td>A 28-year nonprofit with 87% success rates rejected for grants because they "lack national visibility." Three months of placements changes that.</td></tr>
+                <tr><td><strong>Full Program</strong></td><td>$8,500/mo</td><td>Monthly stories, full syndication + top-tier, ongoing AI monitoring, quarterly measurement reports</td><td>A Series B company with $45M in funding that doesn't appear in any AI answer for its product category. Sustained placements build the moat.</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Apple-style Feature Comparison -->
+        <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin: 3rem 0 1.5rem;">Compare packages</h3>
+        <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                <thead>
+                    <tr>
+                        <th style="text-align:left; padding:1rem 0.75rem; border-bottom:2px solid var(--text-ink); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; opacity:0.5; width:40%;"></th>
+                        <th style="text-align:center; padding:1rem 0.75rem; border-bottom:2px solid var(--text-ink); font-size:0.85rem; font-weight:700; width:20%;">Starter<br><span style="font-family:var(--font-serif); font-weight:500; font-size:1.1rem; color:var(--pill-coral);">$5,500</span></th>
+                        <th style="text-align:center; padding:1rem 0.75rem; border-bottom:2px solid var(--pill-coral); font-size:0.85rem; font-weight:700; width:20%; background:rgba(206,90,72,0.06);">Growth<br><span style="font-family:var(--font-serif); font-weight:500; font-size:1.1rem; color:var(--pill-coral);">$18,000</span></th>
+                        <th style="text-align:center; padding:1rem 0.75rem; border-bottom:2px solid var(--text-ink); font-size:0.85rem; font-weight:700; width:20%;">Full Program<br><span style="font-family:var(--font-serif); font-weight:500; font-size:1.1rem; color:var(--pill-coral);">$8,500/mo</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Feature stories written</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">1</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06);">3</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Monthly</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Guaranteed placements</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">2,500+</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06);">2,500+</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">2,500+</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Top-tier outlets (USA Today, Forbes, LA Times)</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); color:var(--pill-coral); font-weight:700;">&#10003;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">AI visibility report (before/after)</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); color:var(--pill-coral); font-weight:700;">&#10003;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">AI optimization for discoverability</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); color:var(--pill-coral); font-weight:700;">&#10003;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Dedicated account manager</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); color:var(--pill-coral); font-weight:700;">&#10003;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Ongoing AI monitoring</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Quarterly measurement reports</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                    <tr><td style="padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1);">Strategy sessions</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); background:rgba(206,90,72,0.06); opacity:0.3;">&#x2014;</td><td style="text-align:center; padding:0.75rem; border-bottom:1px solid rgba(43,59,72,0.1); color:var(--pill-coral); font-weight:700;">&#10003;</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 90-Day Timeline (CSS-only) -->
+        <div style="margin: 3rem 0;">
+            <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin-bottom:2.5rem;">90-Day Pilot Timeline</h3>
+            <div style="display:flex; align-items:flex-start; position:relative; max-width:900px; padding:0 1rem;">
+                <!-- Timeline line -->
+                <div style="position:absolute; top:12px; left:1rem; right:1rem; height:3px; background:rgba(206,90,72,0.2); border-radius:2px;"></div>
+                <!-- Week 1 -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:20px; height:20px; background:var(--pill-coral); border-radius:50%; margin:0 auto 0.75rem; border:3px solid var(--pill-paper);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.6;">Week 1</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:600;">Setup</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">Agree pricing<br>Build templates</div>
+                </div>
+                <!-- Week 2 -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:20px; height:20px; background:var(--pill-coral); border-radius:50%; margin:0 auto 0.75rem; border:3px solid var(--pill-paper);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.6;">Week 2</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:600;">First outreach</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">500 contacts<br>3 warm intros</div>
+                </div>
+                <!-- Week 3-4 -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:22px; height:22px; background:var(--pill-coral); border-radius:50%; margin:0 auto 0.75rem; border:3px solid var(--pill-paper);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.6;">Week 3-4</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:600;">First client closed</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">First story placed<br>First AI report</div>
+                </div>
+                <!-- Week 5-6 -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:22px; height:22px; background:var(--pill-coral); border-radius:50%; margin:0 auto 0.75rem; border:3px solid var(--pill-paper);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.6;">Week 5-6</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:600;">Scale outreach</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">Refine workflow<br>2nd client closes</div>
+                </div>
+                <!-- Week 7-8 -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:22px; height:22px; background:var(--pill-coral); border-radius:50%; margin:0 auto 0.75rem; border:3px solid var(--pill-paper);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.6;">Week 7-8</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:600;">Pipeline built</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">First AI results in<br>Enterprise convos start</div>
+                </div>
+                <!-- Week 9-10 -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:22px; height:22px; background:var(--pill-coral); border-radius:50%; margin:0 auto 0.75rem; border:3px solid var(--pill-paper);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; opacity:0.6;">Week 9-10</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:600;">4 clients active</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">Before/after proof<br>Case studies ready</div>
+                </div>
+                <!-- Week 11-12 (emphasized) -->
+                <div style="flex:1; text-align:center; position:relative; z-index:1;">
+                    <div style="width:28px; height:28px; background:var(--pill-coral); border-radius:50%; margin:-3px auto 0.75rem; border:4px solid var(--pill-paper); box-shadow:0 0 0 3px var(--pill-coral);"></div>
+                    <div style="font-size:0.6rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--pill-coral);">Week 11-12</div>
+                    <div style="font-size:0.8rem; margin-top:0.2rem; line-height:1.3; font-weight:700; color:var(--pill-coral);">Decision point</div>
+                    <div style="font-size:0.7rem; margin-top:0.15rem; opacity:0.6; line-height:1.3;">Review results<br>Continue or adjust</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: THE NUMBERS -->
+    <section class="deck-section paper-bg">
+        <div class="section-num">05</div>
+        <h2 class="section-headline">Conservative math says $1.1M Year 1<br>at 40% margin.</h2>
+        <div class="section-body">
+            <p>The profitability of this model depends on one variable: partner pricing. At NewsUSA's standard retail rate, the Starter tier margin is thin. At a partner rate consistent with standard agency/reseller discounts of 15-25%, the Growth tier reaches approximately 40% gross margin.</p>
+            <p>We are not presenting this as settled math. We are presenting it as the conversation we need to have Monday. Here is what the model looks like at different price points:</p>
+        </div>
+
+        <table class="deck-table">
+            <thead>
+                <tr><th>Scenario</th><th>Clients/Month</th><th>Year 1 Gross</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Conservative</td><td>2</td><td>$504,000</td></tr>
+                <tr><td><strong>Base Case</strong></td><td><strong>4</strong></td><td><strong>$1,100,000</strong></td></tr>
+                <tr><td>Aggressive</td><td>8</td><td>$2,200,000</td></tr>
+            </tbody>
+        </table>
+        <p style="font-size:0.85rem; opacity:0.65; font-style:italic; margin-top:0.5rem;">Assumes approximately 30% Starter ($5,500), 50% Growth ($18,000), 20% Full Program ($8,500/mo). Blended average engagement: $23,000.</p>
+
+        <!-- Revenue bar chart -->
+        <div style="margin: 3rem 0;">
+            <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin-bottom:2rem;">Revenue Trajectory</h3>
+            <div style="display:flex; align-items:flex-end; gap:1.5rem; height:200px; padding-bottom:1rem; border-bottom:1px solid rgba(43,59,72,0.15);">
+                <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;">
+                    <div style="font-family:var(--font-serif); font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">$504K</div>
+                    <div style="width:100%; max-width:80px; height:25%; background:rgba(206,90,72,0.25); border-radius:4px 4px 0 0;"></div>
+                    <div style="font-size:0.7rem; margin-top:0.5rem; opacity:0.6;">Conservative</div>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;">
+                    <div style="font-family:var(--font-serif); font-size:1.1rem; font-weight:600; color:var(--pill-coral);">$1.1M</div>
+                    <div style="width:100%; max-width:80px; height:55%; background:var(--pill-coral); border-radius:4px 4px 0 0;"></div>
+                    <div style="font-size:0.7rem; margin-top:0.5rem; font-weight:700;">Base Case</div>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;">
+                    <div style="font-family:var(--font-serif); font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">$2.2M</div>
+                    <div style="width:100%; max-width:80px; height:100%; background:rgba(206,90,72,0.5); border-radius:4px 4px 0 0;"></div>
+                    <div style="font-size:0.7rem; margin-top:0.5rem; opacity:0.6;">Aggressive</div>
+                </div>
+            </div>
+            <div style="font-size:0.75rem; opacity:0.5; margin-top:0.75rem; font-style:italic;">Year 1 gross revenue. Mix assumption: 30% Starter, 50% Growth, 20% Full Program. Blended avg: $23K.</div>
+            <div style="font-size:0.75rem; opacity:0.5; margin-top:0.5rem; font-style:italic;">Margin assumes partner pricing. At retail, margins compress. This is the Monday conversation.</div>
+        </div>
+
+        <!-- Unit Economics Table -->
+        <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin: 3rem 0 1.5rem;">Unit Economics</h3>
+        <table class="deck-table">
+            <thead>
+                <tr><th>Metric</th><th>Starter ($5,500)</th><th>Growth ($18,000)</th><th>Full Program ($8,500/mo)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Est. production cost</td><td>$4,500-$5,000</td><td>$12,000-$15,000</td><td>$4,500-$5,000/mo</td></tr>
+                <tr><td>Strategy + management</td><td>~$2,600</td><td>~$6,600</td><td>~$3,500/mo</td></tr>
+                <tr><td>Est. gross margin</td><td>Thin at retail</td><td><strong>~40% at partner rate</strong></td><td>Dependent on partner rate</td></tr>
+            </tbody>
+        </table>
+
+        <h3 style="font-family:var(--font-serif); font-size:1.5rem; margin: 3rem 0 1.5rem;">Proposed Revenue Share</h3>
+        <table class="deck-table">
+            <thead>
+                <tr><th>Partner</th><th>Share</th><th>Role</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>NewsUSA</strong></td><td><strong>40%</strong></td><td>Production, distribution, AI optimization infrastructure</td></tr>
+                <tr><td><strong>Charity Brands</strong></td><td><strong>25%</strong></td><td>Strategic architecture, Fortune 500 relationships</td></tr>
+                <tr><td><strong>Summit X Digital</strong></td><td><strong>35%</strong></td><td>Sales, client acquisition, management, measurement</td></tr>
+            </tbody>
+        </table>
+
+        <div class="stat-row">
+            <div class="stat-item">
+                <div class="stat-num">40%</div>
+                <div class="stat-label">Gross margin at partner pricing</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">2</div>
+                <div class="stat-label">Clients/month to break even</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">$4.5-18B</div>
+                <div class="stat-label">Addressable market (SMBs alone)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: THE ASK -->
+    <section class="deck-section sand-bg" id="contact">
+        <div class="section-num">06</div>
+        <h2 class="section-headline">Three things for Monday.</h2>
+
+        <div class="ask-card">
+            <div class="ask-num">1</div>
+            <div>
+                <div class="ask-title">Partner pricing</div>
+                <div class="ask-body">What does a bundled rate look like for a dedicated sales channel? This is the single variable that determines whether the model works.</div>
+            </div>
+        </div>
+        <div class="ask-card">
+            <div class="ask-num">2</div>
+            <div>
+                <div class="ask-title">Three pilot clients</div>
+                <div class="ask-body">One from Stephen's network. One from Tom's outbound. One reactivation from your 32,000. Ninety days. Prove the model.</div>
+            </div>
+        </div>
+        <div class="ask-card">
+            <div class="ask-num">3</div>
+            <div>
+                <div class="ask-title">Access to the AI visibility report tool</div>
+                <div class="ask-body">The free AI visibility report is the door-opener. We need to run these for prospects before the first meeting, showing them where they stand in AI answers and where their competitors appear instead. This is the most effective sales tool in the model.</div>
+            </div>
+        </div>
+
+        <!-- Day 91 -->
+        <div class="section-body" style="margin-top: 3rem; padding:2rem; border:1px solid rgba(43,59,72,0.15); background:rgba(255,251,245,0.4);">
+            <h3 style="font-family:var(--font-serif); font-size:1.25rem; margin-bottom:1rem;">What happens at Day 91</h3>
+            <p>At 90 days, all three parties review: how many clients closed, AI visibility outcomes, pipeline growth, and whether the unit economics hold. If the pilot demonstrates demand, we formalize a revenue share agreement for ongoing operations. If it doesn't, all parties have invested minimally and gained market intelligence. No long-term commitments. No exclusivity. Just proof.</p>
+        </div>
+
+        <div class="section-body" style="margin-top: 2rem;">
+            <p style="font-size: 0.9rem; opacity: 0.6; font-style: italic;">A detailed strategic document accompanies this page with market analysis, unit economics, competitive landscape, and a 90-day execution plan.</p>
+        </div>
+    </section>
+
+    <!-- CLOSE -->
+    <section class="deck-section paper-bg">
+        <div class="close-section">
+            <div class="close-line">Monday, 5:00 PM ET.</div>
+            <div class="close-line">Looking forward to it, Rick.</div>
+            <div class="close-name">Tom Nwachuku</div>
+            <div class="close-meta">Founder, Summit X Digital | Service-Disabled Veteran, U.S. Army 10th Mountain Division</div>
+        </div>
+    </section>
+
+    <footer class="deck-footer">
+        <span>April 2026 | Confidential</span>
+        <span>tom@summitxdigital.com</span>
+    </footer>
+
+    <style>
+        /* Scroll-triggered animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+
+        /* Bar chart grow animation */
+        .bar-grow {
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .bar-grow.visible {
+            transform: scaleY(1);
+        }
+        .bar-grow.delay-1 { transition-delay: 0.2s; }
+        .bar-grow.delay-2 { transition-delay: 0.4s; }
+        .bar-grow.delay-3 { transition-delay: 0.6s; }
+        .bar-grow.delay-4 { transition-delay: 0.8s; }
+
+        /* Stat number count-up feel */
+        .stat-num {
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .stat-num.counting {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Table row stagger */
+        .deck-table tbody tr {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .deck-table.visible tbody tr:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.1s; }
+        .deck-table.visible tbody tr:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
+        .deck-table.visible tbody tr:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.3s; }
+        .deck-table.visible tbody tr:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.4s; }
+
+        /* Ask cards stagger */
+        .ask-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .ask-card.visible { opacity: 1; transform: translateY(0); }
+        .ask-card:nth-of-type(2) { transition-delay: 0.15s; }
+        .ask-card:nth-of-type(3) { transition-delay: 0.3s; }
+
+        /* Case study cards */
+        .case-card {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .case-card.visible:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+        .case-card.visible:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+        .case-card.visible:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.5s; }
+
+        /* Italic close line */
+        .italic-close {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s;
+        }
+        .italic-close.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Trio card entrance */
+        .trio-card {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .trio-card.visible:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.1s; }
+        .trio-card.visible:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.25s; }
+        .trio-card.visible:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.4s; }
+
+        /* Section number entrance */
+        .section-num {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .section-num.visible {
+            opacity: 0.4;
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        // Intersection Observer for scroll-triggered animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        // Observe all animatable elements
+        // Cost chart bars: trigger scaleX on scroll
+        const costObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.cost-bar').forEach(bar => {
+                        bar.style.transform = 'scaleX(1)';
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.cost-chart').forEach(el => costObserver.observe(el));
+
+        document.querySelectorAll('.section-num, .section-headline, .stat-item, .deck-table, .italic-close, .ask-card, .trio-card, .case-card, .without-card, .bar-grow').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Also observe section headlines
+        document.querySelectorAll('.section-headline').forEach(el => {
+            el.classList.add('reveal');
+            observer.observe(el);
+        });
+
+        // Observe section bodies
+        document.querySelectorAll('.section-body').forEach(el => {
+            el.classList.add('reveal', 'reveal-delay-1');
+            observer.observe(el);
+        });
+
+        // Observe stat items with stagger
+        document.querySelectorAll('.stat-row').forEach(row => {
+            row.querySelectorAll('.stat-item').forEach((item, i) => {
+                item.classList.add('reveal', `reveal-delay-${i + 1}`);
+                observer.observe(item);
+            });
+        });
+    </script>
+
+</body></html>
